@@ -1,50 +1,120 @@
-import java.util.Scanner;
+public class Policy {
+    private int policyNumber;
+    private String providerName;
+    private String firstName;
+    private String lastName;
+    private int age;
+    private String smokingStatus;
+    private double height;
+    private double weight;
 
-public class Project_Swayam_Tripathy {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+    public Policy() {
+        this.policyNumber = 0;
+        this.providerName = "";
+        this.firstName = "";
+        this.lastName = "";
+        this.age = 0;
+        this.smokingStatus = "";
+        this.height = 0.0;
+        this.weight = 0.0;
+    }
 
-        System.out.print("Please enter the Policy Number: ");
-        int policyNumber = scanner.nextInt();
-        scanner.nextLine(); 
+    public Policy(int policyNumber, String providerName, String firstName, String lastName, 
+                  int age, String smokingStatus, double height, double weight) {
+        this.policyNumber = policyNumber;
+        this.providerName = providerName;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.smokingStatus = smokingStatus;
+        this.height = height;
+        this.weight = weight;
+    }
 
-        System.out.print("Please enter the Provider Name: ");
-        String providerName = scanner.nextLine();
+    public int getPolicyNumber() {
+        return policyNumber;
+    }
 
-        System.out.print("Please enter the Policyholder’s First Name: ");
-        String firstName = scanner.nextLine();
+    public void setPolicyNumber(int policyNumber) {
+        this.policyNumber = policyNumber;
+    }
 
-        System.out.print("Please enter the Policyholder’s Last Name: ");
-        String lastName = scanner.nextLine();
+    public String getProviderName() {
+        return providerName;
+    }
 
-        System.out.print("Please enter the Policyholder’s Age: ");
-        int age = scanner.nextInt();
-        scanner.nextLine(); 
+    public void setProviderName(String providerName) {
+        this.providerName = providerName;
+    }
 
-        System.out.print("Please enter the Policyholder’s Smoking Status (smoker/non-smoker): ");
-        String smokingStatus = scanner.nextLine();
+    public String getFirstName() {
+        return firstName;
+    }
 
-        System.out.print("Please enter the Policyholder’s Height (in inches): ");
-        double height = scanner.nextDouble();
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-        System.out.print("Please enter the Policyholder’s Weight (in pounds): ");
-        double weight = scanner.nextDouble();
+    public String getLastName() {
+        return lastName;
+    }
 
-        System.out.println(); 
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
-        Policy policy = new Policy(policyNumber, providerName, firstName, lastName, age, smokingStatus, height, weight);
+    public int getAge() {
+        return age;
+    }
 
-        System.out.println("Policy Number: " + policy.getPolicyNumber());
-        System.out.println("Provider Name: " + policy.getProviderName());
-        System.out.println("Policyholder’s First Name: " + policy.getFirstName());
-        System.out.println("Policyholder’s Last Name: " + policy.getLastName());
-        System.out.println("Policyholder’s Age: " + policy.getAge());
-        System.out.println("Policyholder’s Smoking Status: " + policy.getSmokingStatus());
-        System.out.println("Policyholder’s Height: " + policy.getHeight() + " inches");
-        System.out.println("Policyholder’s Weight: " + policy.getWeight() + " pounds");
-        System.out.printf("Policyholder’s BMI: %.2f\n", policy.getBMI());
-        System.out.printf("Policy Price: $%.2f\n", policy.getPrice());
+    public void setAge(int age) {
+        this.age = age;
+    }
 
-        scanner.close();
+    public String getSmokingStatus() {
+        return smokingStatus;
+    }
+
+    public void setSmokingStatus(String smokingStatus) {
+        this.smokingStatus = smokingStatus;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    public void setHeight(double height) {
+        this.height = height;
+    }
+
+    public double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+
+    public double getBMI() {
+        return (weight * 703.0) / (height * height);
+    }
+
+    public double getPrice() {
+        double price = 600.0; 
+
+        if (age > 50) {
+            price += 75.0;
+        }
+
+        if (smokingStatus.equalsIgnoreCase("smoker")) {
+            price += 100.0;
+        }
+
+        double currentBMI = getBMI();
+        if (currentBMI > 35.0) {
+            price += (currentBMI - 35.0) * 20.0;
+        }
+
+        return price;
     }
 }
